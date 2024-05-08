@@ -1,7 +1,7 @@
 #!/bin/bash
 
-echo "Installing langchain..."
-pip --quiet install langchain
+echo "Installing/updating LangChain..."
+pip install --quiet --upgrade langchain
 
 # Check and install brew on macOS if it's not installed
 if [[ "$OSTYPE" == "darwin"* ]]; then
@@ -39,5 +39,9 @@ fi
 
 echo "Installation completed!"
 
-echo "Serving ollama..."
-ollama serve
+if netstat -tuln | grep -q ':11434 '; then
+    echo "Port 11434 is being used. Ollama is served."
+else
+    echo "Serving ollama..."
+    ollama serve
+fi
