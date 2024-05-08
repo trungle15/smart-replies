@@ -29,12 +29,15 @@ else
     exit 1
 fi
 
-# Check if gemma:2b is already installed
-if ollama list | grep -wq 'gemma:2b'; then
-    echo "gemma:2b is already installed."
+# Check if llama3 is already installed
+if ollama list | grep -wq 'llama3'; then
+    echo "llama3 is already installed."
 else
-    echo "Installing gemma:2b..."
-    ollama pull gemma:2b
+    echo "Installing llama3..."
+    ollama pull llama3
 fi
 
 echo "Installation completed!"
+
+echo "Serving ollama..."
+ollama serve
